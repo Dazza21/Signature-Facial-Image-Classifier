@@ -1,15 +1,12 @@
-import cv2
-import numpy as np
+from mtcnn import MTCNN
 
 
 def detectFace(photo):
-    face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+    classifier = MTCNN()
 
-    gray = cv2.cvtColor(np.array(photo), cv2.COLOR_BGR2GRAY)
+    res = classifier.detect_faces(photo)
 
-    faces = face_cascade.detectMultiScale(gray, 1.1, 4)
-
-    if faces == ():
-        return False
-    else:
+    if res:
         return True
+    else:
+        return False
